@@ -125,10 +125,12 @@ class Client extends EventEmitter {
             timeout: 0,
             referer: 'https://whatsapp.com/'
         });
+        console.log('This is the whatsapp URL', WhatsWebURL);
 
         await page.evaluate(`function getElementByXpath(path) {
             return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
           }`);
+          
 
         let lastPercent = null,
             lastPercentMessage = null;
@@ -174,7 +176,7 @@ class Client extends EventEmitter {
 
         const INTRO_IMG_SELECTOR = '[data-icon=\'search\']';
         const INTRO_QRCODE_SELECTOR = 'div[data-ref] canvas';
-
+        console.log('Entering to authentication', WhatsWebURL);
         // Checks which selector appears first
         const needAuthentication = await Promise.race([
             new Promise(resolve => {
@@ -190,6 +192,8 @@ class Client extends EventEmitter {
                     .catch((err) => resolve(err));
             })
         ]);
+
+        console.log('Already done with authentication', needAuthentication);
 
         // Checks if an error occurred on the first found selector. The second will be discarded and ignored by .race;
         if (needAuthentication instanceof Error) throw needAuthentication;
