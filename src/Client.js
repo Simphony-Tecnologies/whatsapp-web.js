@@ -174,7 +174,7 @@ class Client extends EventEmitter {
             }
         );
 
-        const DAFAULT_USER_SELECTOR = '[data-icon=\'default-user\']';
+        // const DAFAULT_USER_SELECTOR = '[data-icon=\'default-user\']';
         const INTRO_QRCODE_SELECTOR = 'div[data-ref] canvas';
         const INTRO_IMG_SELECTOR = '[data-icon="chat"],[data-icon="intro-md-beta-logo-dark"],[data-icon="intro-md-beta-logo-light"],[aria-label="profile photo"]';
 
@@ -187,12 +187,12 @@ class Client extends EventEmitter {
                     .then(() => resolve(false))
                     .catch((err) => resolve(err));
             }),
-            new Promise(resolve => {
-                console.log('Entering on second selector');
-                page.waitForSelector(DAFAULT_USER_SELECTOR, { timeout: this.options.authTimeoutMs })
-                    .then(() => resolve(false))
-                    .catch((err) => resolve(err));
-            }),
+            // new Promise(resolve => {
+            //     console.log('Entering on second selector');
+            //     page.waitForSelector(DAFAULT_USER_SELECTOR, { timeout: this.options.authTimeoutMs })
+            //         .then(() => resolve(false))
+            //         .catch((err) => resolve(err));
+            // }),
             new Promise(resolve => {
                 console.log('Entering on third selector');
                 page.waitForSelector(INTRO_QRCODE_SELECTOR, { timeout: this.options.authTimeoutMs })
