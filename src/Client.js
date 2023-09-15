@@ -175,8 +175,8 @@ class Client extends EventEmitter {
         );
 
         const DAFAULT_USER_SELECTOR = '[data-icon=\'default-user\']';
-        const INTRO_IMG_SELECTOR = '[data-icon=\'chat\']';
         const INTRO_QRCODE_SELECTOR = 'div[data-ref] canvas';
+        const INTRO_IMG_SELECTOR = '[data-icon="chat"],[data-icon="intro-md-beta-logo-dark"],[data-icon="intro-md-beta-logo-light"],[aria-label="profile photo"]';
 
         console.log('Entering on promise authentication');
         // Checks which selector appears first
@@ -204,7 +204,7 @@ class Client extends EventEmitter {
         console.log('Already done with authentication', needAuthentication);
 
         // Checks if an error occurred on the first found selector. The second will be discarded and ignored by .race;
-        if (needAuthentication instanceof Error) throw needAuthentication;
+        // if (needAuthentication instanceof Error) throw needAuthentication;
 
         // Scan-qrcode selector was found. Needs authentication
         if (needAuthentication) {
