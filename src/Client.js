@@ -178,11 +178,13 @@ class Client extends EventEmitter {
         // Checks which selector appears first
         const needAuthentication = await Promise.race([
             new Promise(resolve => {
+                console.log('Entering on first selector');
                 page.waitForSelector(INTRO_IMG_SELECTOR, { timeout: this.options.authTimeoutMs })
                     .then(() => resolve(false))
                     .catch((err) => resolve(err));
             }),
             new Promise(resolve => {
+                console.log('Entering on second selector');
                 page.waitForSelector(INTRO_QRCODE_SELECTOR, { timeout: this.options.authTimeoutMs })
                     .then(() => resolve(true))
                     .catch((err) => resolve(err));
