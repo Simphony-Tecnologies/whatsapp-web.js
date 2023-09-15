@@ -178,7 +178,7 @@ class Client extends EventEmitter {
         const INTRO_IMG_SELECTOR = '[data-icon=\'chat\']';
         const INTRO_QRCODE_SELECTOR = 'div[data-ref] canvas';
 
-        console.log('Entering on promise authentication', needAuthentication);
+        console.log('Entering on promise authentication');
         // Checks which selector appears first
         const needAuthentication = await Promise.race([
             new Promise(resolve => {
