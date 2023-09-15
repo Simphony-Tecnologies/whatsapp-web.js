@@ -174,9 +174,11 @@ class Client extends EventEmitter {
             }
         );
 
-        const INTRO_IMG_SELECTOR = '[data-icon=\'search\']';
+        const DAFAULT_USER_SELECTOR = '[data-icon=\'default-user\']';
+        const INTRO_IMG_SELECTOR = '[data-icon=\'chat\']';
         const INTRO_QRCODE_SELECTOR = 'div[data-ref] canvas';
-        console.log('Entering to authentication', WhatsWebURL);
+
+        console.log('Entering on promise authentication', needAuthentication);
         // Checks which selector appears first
         const needAuthentication = await Promise.race([
             new Promise(resolve => {
@@ -187,6 +189,12 @@ class Client extends EventEmitter {
             }),
             new Promise(resolve => {
                 console.log('Entering on second selector');
+                page.waitForSelector(DAFAULT_USER_SELECTOR, { timeout: this.options.authTimeoutMs })
+                    .then(() => resolve(false))
+                    .catch((err) => resolve(err));
+            }),
+            new Promise(resolve => {
+                console.log('Entering on third selector');
                 page.waitForSelector(INTRO_QRCODE_SELECTOR, { timeout: this.options.authTimeoutMs })
                     .then(() => resolve(true))
                     .catch((err) => resolve(err));
